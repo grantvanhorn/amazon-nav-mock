@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import sideNavigationConfig from '../lib/sideNavigationConfig';
 import NavEntryHeader from './NavEntryHeader';
 import NavEntry from './NavEntry';
@@ -28,15 +28,16 @@ const SideNavigation = () => {
         subEntries,
       } = subEntry;
 
-      console.log('subEntry', subEntry);
-
       if (subEntries) {
+        // We are going to use this arrary to hold our right menu entires for
+        // each subsection.
         const subEntriesDom: Array<ReactNode> = [];
         subEntries.forEach(subEntry => {
           const {
             name: rightEntryName,
             rightMenuEntries,
           } = subEntry;
+          // Render the contents of each right menu entry
           const rightSubMenu = rightMenuEntries.map((rightMenuEntry) => {
             const {
               name: rightSubEntryName,
@@ -51,6 +52,8 @@ const SideNavigation = () => {
             );
           });
 
+          // Each of the sub entries need to be added to the array otherwise
+          // we would not have a complete menu
           subEntriesDom.push((
             <>
               <NavEntryHeader
@@ -60,8 +63,7 @@ const SideNavigation = () => {
             </>
           ));
 
-          console.log('rightSubMenu', rightSubMenu);
-
+          // Now lets build the whole menu and store it in our menus object
           rightMenusContent[subEntryName] = (
             <>
               <MainMenuReturn
@@ -125,9 +127,11 @@ interface MainMenuInterface {
   activeSubMenu: string;
 }
 
-interface RightMenuInterface {
-  activeSubMenu: string;
-}
+const sharedMenuStyles = css`
+  transition: 200ms;
+  position: absolute;
+  top: 0;
+`;
 
 const MainMenu = styled.div<MainMenuInterface>`
   ${({
@@ -135,10 +139,12 @@ const MainMenu = styled.div<MainMenuInterface>`
   }) => `
     left: ${activeSubMenu === 'main' ? 0 : -300}px;
   `}
-  transition: 200ms;
-  position: absolute;
-  top: 0;
+  ${sharedMenuStyles}
 `;
+
+interface RightMenuInterface {
+  activeSubMenu: string;
+}
 
 const RightMenu = styled.div<RightMenuInterface>`
   ${({
@@ -146,9 +152,7 @@ const RightMenu = styled.div<RightMenuInterface>`
   }) => `
     left: ${activeSubMenu === 'main' ? 300 : 0}px;
   `}
-  transition: 200ms;
-  position: absolute;
-  top: 0;
+  ${sharedMenuStyles}
 `;
 
 const MainMenuReturn = styled.div`
