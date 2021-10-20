@@ -2,28 +2,36 @@ import styled from 'styled-components';
 import sideNavigationConfig from '../lib/sideNavigationConfig';
 import NavEntryHeader from './NavEntryHeader';
 import NavEntry from './NavEntry';
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import RightMenusContentInterface from '../interfaces/RightMenusContentInterface';
 
 const mainMenuKey = 'main';
 
 const SideNavigation = () => {
   const [activeSubMenu, setActiveSubMenu] = useState(mainMenuKey);
+  // A place to store the right menus, we will build them up before the user
+  // clicks anything. Once the user clicks the dom is already built and chosen
+  // from the object storing all the react nodes.
   const rightMenusContent: RightMenusContentInterface = { };
 
+  // Start building out our menu.
   const navEntriesDom = sideNavigationConfig.map((mainEntry) => {
     const {
       name: mainEntryName,
       entries,
     } = mainEntry;
 
+    // Loop through the highest level of our nav entries.
     const navEntries = entries.map((subEntry) => {
       const {
         name: subEntryName,
         subEntries,
       } = subEntry;
 
+      console.log('subEntry', subEntry);
+
       if (subEntries) {
+        const subEntriesDom: Array<ReactNode> = [];
         subEntries.forEach(subEntry => {
           const {
             name: rightEntryName,
@@ -31,16 +39,28 @@ const SideNavigation = () => {
           } = subEntry;
           const rightSubMenu = rightMenuEntries.map((rightMenuEntry) => {
             const {
-              name,
+              name: rightSubEntryName,
             } = rightMenuEntry;
+
             return (
               <NavEntry
-                key={`right-sub-nav-entry-${name}`}
-                copy={name}
+                key={`right-sub-nav-entry-${rightSubEntryName}`}
+                copy={rightSubEntryName}
                 hasSubentries={false}
               />
             );
           });
+
+          subEntriesDom.push((
+            <>
+              <NavEntryHeader
+                copy={rightEntryName}
+              />
+              {rightSubMenu}
+            </>
+          ));
+
+          console.log('rightSubMenu', rightSubMenu);
 
           rightMenusContent[subEntryName] = (
             <>
@@ -49,10 +69,7 @@ const SideNavigation = () => {
               >
                 ← Main Menu
               </MainMenuReturn>
-              <NavEntryHeader
-                copy={rightEntryName}
-              />
-              {rightSubMenu}
+              {subEntriesDom}
             </>
           );
         });

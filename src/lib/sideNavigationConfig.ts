@@ -31,6 +31,26 @@ const sideNavigationConfig = [
               {
                 name: "Prime Video"
               },
+              {
+                name: "Included with Prime"
+              },
+              {
+                name: "Prime Video Channels"
+              },
+            ],
+          },
+          {
+            name: "More To Explore",
+            rightMenuEntries: [
+              {
+                name: "Amazon Originals"
+              },
+              {
+                name: "Kids"
+              },
+              {
+                name: "Coming soon"
+              },
             ],
           },
         ],
@@ -43,6 +63,81 @@ const sideNavigationConfig = [
             rightMenuEntries: [
               {
                 name: "Amazon Music Unlimited"
+              },
+              {
+                name: "Amazon Music Prime"
+              },
+              {
+                name: "Free Streaming Music"
+              },
+            ],
+          },
+          {
+            name: "Buy Music",
+            rightMenuEntries: [
+              {
+                name: "CDs & Vinyl"
+              },
+              {
+                name: "Download Store"
+              },
+              {
+                name: "Artist Merch Shop"
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    // main entry
+    name: 'Shop By Department',
+    entries: [
+      {
+        name: 'Clothing, Shoes, Jewelry & Watches',
+        subEntries: [
+          {
+            name: "Clothing, Shoes, Jewelry & Watches",
+            rightMenuEntries: [
+              {
+                name: "Amazon Fashion"
+              },
+              {
+                name: "Women"
+              },
+              {
+                name: "Men"
+              },
+              {
+                name: "Girls"
+              },
+              {
+                name: "Boys"
+              },
+            ],
+          },
+          {
+            name: "More To Explore",
+            rightMenuEntries: [
+              {
+                name: "Our Brands"
+              },
+              {
+                name: "The Shop by Shopbop"
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Amazon Fresh',
+        subEntries: [
+          {
+            name: "Amazon Fresh",
+            rightMenuEntries: [
+              {
+                name: "All Amazon Fresh"
               },
             ],
           },
