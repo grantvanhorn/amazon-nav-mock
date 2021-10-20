@@ -1,14 +1,25 @@
 const sideNavigationConfig = [
   {
+    // main entry
     name: 'Trending',
+    // list of subentries
     entries: [
       {
         name: 'Best Sellers',
         subEntries: null,
       },
+      {
+        name: 'New Releases',
+        subEntries: null,
+      },
+      {
+        name: 'Movers & Shakers',
+        subEntries: null,
+      },
     ],
   },
   {
+    // main entry
     name: 'Digital Content & Devices',
     entries: [
       {
@@ -16,7 +27,7 @@ const sideNavigationConfig = [
         subEntries: [
           {
             name: "Prime Video",
-            subEntries: [
+            rightMenuEntries: [
               {
                 name: "Prime Video"
               },
@@ -29,7 +40,7 @@ const sideNavigationConfig = [
         subEntries: [
           {
             name: "Stream Music",
-            subEntries: [
+            rightMenuEntries: [
               {
                 name: "Amazon Music Unlimited"
               },

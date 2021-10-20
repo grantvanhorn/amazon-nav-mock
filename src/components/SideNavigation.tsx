@@ -13,26 +13,36 @@ const SideNavigation = () => {
 
   const navEntriesDom = sideNavigationConfig.map((mainEntry) => {
     const {
-      name,
+      name: mainEntryName,
       entries,
     } = mainEntry;
 
     const navEntries = entries.map((subEntry) => {
       const {
-        name,
+        name: subEntryName,
         subEntries,
       } = subEntry;
 
       if (subEntries) {
-        subEntries.forEach(se => {
-          const rightSubMenu = se.subEntries.map((onese) => {
+        subEntries.forEach(subEntry => {
+          const {
+            name: rightEntryName,
+            rightMenuEntries,
+          } = subEntry;
+          const rightSubMenu = rightMenuEntries.map((rightMenuEntry) => {
+            const {
+              name,
+            } = rightMenuEntry;
             return (
               <NavEntry
-                copy={onese.name}
+                key={`right-sub-nav-entry-${name}`}
+                copy={name}
+                hasSubentries={false}
               />
             );
-          })
-          rightMenusContent[name] = (
+          });
+
+          rightMenusContent[subEntryName] = (
             <>
               <MainMenuReturn
                 onClick={() => setActiveSubMenu(mainMenuKey)}
@@ -40,7 +50,7 @@ const SideNavigation = () => {
                 ← Main Menu
               </MainMenuReturn>
               <NavEntryHeader
-                copy={name}
+                copy={rightEntryName}
               />
               {rightSubMenu}
             </>
@@ -50,8 +60,10 @@ const SideNavigation = () => {
 
       return (
         <NavEntry
-          copy={name}
+          key={`nav-entry-${subEntryName}`}
+          copy={subEntryName}
           clickAction={setActiveSubMenu}
+          hasSubentries={subEntries !== null}
         />
       );
     });
@@ -59,7 +71,8 @@ const SideNavigation = () => {
     return (
       <>
         <NavEntryHeader
-          copy={name}
+          key={`nav-entry-header-${mainEntryName}`}
+          copy={mainEntryName}
         />
         {navEntries}
       </>
@@ -67,8 +80,6 @@ const SideNavigation = () => {
   });
 
   const rightMenu = activeSubMenu ? rightMenusContent[activeSubMenu] : null;
-
-  console.log('rightMenu', rightMenu);
 
   return (
     <Wrapper>

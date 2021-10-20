@@ -4,9 +4,10 @@ import NavEntryInterface from "../interfaces/NavEntryInterface";
 const NavEntry = ({
   copy,
   clickAction,
+  hasSubentries,
 }: NavEntryInterface) => {
   const onClick = () => {
-    if (!clickAction) {
+    if (!clickAction || !hasSubentries) {
       return;
     }
 
