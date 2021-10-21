@@ -5,13 +5,14 @@ const NavEntry = ({
   copy,
   clickAction,
   hasSubentries,
+  clickKey,
 }: NavEntryInterface) => {
   const onClick = () => {
     if (!clickAction || !hasSubentries) {
       return;
     }
 
-    clickAction(copy);
+    clickAction(clickKey);
   };
 
   return (
